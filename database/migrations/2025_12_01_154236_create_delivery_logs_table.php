@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('delivery_logs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('notification_id')->constrained('notifications');
-            $table->foreignId('device_id')->constrained('devices');
+            $table->foreignId('notification_id')->constrained('notifications')->cascadeOnDelete();
+            $table->foreignId('device_id')->constrained('devices')->cascadeOnDelete();
             $table->string('channel'); // reverb|fcm|apns|webpush|sms
-            $table->enum('status', ['queued', 'sent', 'delivered', 'failed', 'retrying']);
+            $table->enum('status', ['queued','sent','delivered','failed','retrying'])->default('queued');
             $table->text('response')->nullable();
             $table->timestamps();
         });

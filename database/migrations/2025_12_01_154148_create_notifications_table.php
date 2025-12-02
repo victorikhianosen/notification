@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
             $table->uuid('notification_id')->unique();
-            $table->foreignId('sender_id')->nullable()->constrained('users');
+            $table->foreignId('sender_id')->nullable()->constrained('users')->nullOnDelete();
             $table->json('payload');
             $table->string('priority')->default('normal');
             $table->integer('ttl')->nullable();

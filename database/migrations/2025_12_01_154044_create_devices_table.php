@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('devices', function (Blueprint $table) {
             $table->id();
-            $table->uuid('device_id')->unique(); // client-provided or generated
-            $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->uuid('device_id')->unique();
+            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
             $table->string('platform'); // 'android'|'ios'|'web'
-            $table->string('token')->nullable(); // FCM token or APNs token or web push endpoint id
-            $table->string('reverb_channel')->nullable(); // e.g. "devices.{device_id}"
+            $table->string('token')->nullable(); // FCM/APNs token or web push identifier
+            $table->string('reverb_channel')->nullable();
             $table->json('capabilities')->nullable();
             $table->timestamp('last_seen_at')->nullable();
             $table->boolean('online')->default(false);

@@ -30,7 +30,7 @@ return Application::configure(basePath: dirname(__DIR__))
 
             // Temporary responder using your trait
             $responder = new class {
-                use \App\Traits\HttpResponses;
+                use HttpResponses;
             };
 
             $http = 500;
